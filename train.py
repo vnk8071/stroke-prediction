@@ -1,3 +1,4 @@
+import gc
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing
@@ -26,7 +27,7 @@ warnings.filterwarnings("ignore")
 from google.colab import drive
 drive.mount('/content/gdrive')
 
-
+gc.collect()
 # Load data
 df = pd.read_csv("/content/gdrive/MyDrive/Colab Notebooks/Stroke data/healthcare-dataset-stroke-data.csv")
 df.head()
