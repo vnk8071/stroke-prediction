@@ -1,12 +1,12 @@
-# https://drive.google.com/drive/folders/10ipsAQuDJT_TE9rNKF4CiQhnM6G6dmnF?usp=sharing
+# https://drive.google.com/file/d/1VzgL-JO6JyOT4e6l5RumZyuo2a4tnlZ-/view?usp=sharing
 # Ref: https://github.com/nsadawi/Download-Large-File-From-Google-Drive-Using-Python/blob/master/Download-Large-File-from-Google-Drive.ipynb
 
 import requests
 import os
 import shutil
 
-FILE_ID = '10ipsAQuDJT_TE9rNKF4CiQhnM6G6dmnF'
-DESTINATION = './data/data-stroke-prediction.zip'
+FILE_ID = '1VzgL-JO6JyOT4e6l5RumZyuo2a4tnlZ-'
+DESTINATION = './data/stroke-data.zip'
 
 def download_file_from_google_drive(id, destination):
     URL = "https://docs.google.com/uc?export=download"
