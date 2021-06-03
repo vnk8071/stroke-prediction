@@ -1,4 +1,3 @@
-import gc
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing
@@ -8,7 +7,9 @@ from sklearn.tree import DecisionTreeRegressor
 
 import seaborn as sns
 import matplotlib.pyplot as plt
+import config
 
+from sklearn.model_selection import train_test_split, cross_val_score
 
 from sklearn.linear_model import LogisticRegression
 #from lightgbm import LGBMClassifier
@@ -24,33 +25,9 @@ from sklearn.metrics import f1_score, log_loss, roc_auc_score, recall_score, acc
 import warnings
 warnings.filterwarnings("ignore")
 
-from google.colab import drive
-drive.mount('/content/gdrive')
-
-gc.collect()
-# Load data
-df = pd.read_csv("/content/gdrive/MyDrive/Colab Notebooks/Stroke data/healthcare-dataset-stroke-data.csv")
-df.head()
-
-DT_bmi_pipe = Pipeline(steps=[('scale',StandardScaler()),
-                               ('lr',DecisionTreeRegressor(random_state=42))])
-X_BMI = df[['age','gender','bmi']].copy()
-X_BMI.gender = X_BMI.gender.replace({'Male':0,'Female':1,'Other':-1}).astype(np.uint8)
-
-# Handling misssing
-Missing = X_BMI[X_BMI.bmi.isna()]
-X_BMI = X_BMI[~X_BMI.bmi.isna()]
-Y_BMI = X_BMI.pop('bmi')
-DT_bmi_pipe.fit(X_BMI,Y_BMI)
-predicted_bmi = pd.Series(DT_bmi_pipe.predict(Missing[['age','gender']]),index=Missing.index)
-df.loc[Missing.index,'bmi'] = predicted_bmi
-df.head()
-
-df.drop(df[df['gender'] == "Other"].index, inplace = True)
-df['gender'].value_counts()
-
+df = pd.read_csv(config.TRAINING_FILE)
 # preprocessing
-X = df.drop("stroke", axis= "columns")
+X = df.drop("stroke", axis= "columns").values
 y = df.stroke
 from sklearn.preprocessing import LabelEncoder
 
@@ -69,16 +46,14 @@ X[num_cols] = sc.fit_transform(X[num_cols])
 X = label_encoder(X)
 
 # split data
-from sklearn.model_selection import train_test_split, cross_val_score
-from imblearn.over_sampling import SMOTE
+X_train, X_test, y_train, y_test = train_test_split(X.values, y.values, test_size=0.3, random_state=0)
 cv = 10
 X_train, X_test, y_train, y_test = train_test_split( X.values, y.values, test_size=0.3, random_state=0)
-X_train_balanced, y_train_balanced = oversample.fit_resample(X_train, y_train)
 
 # Train
     #LogisticRegression
 lg = LogisticRegression(C=0.01,penalty='l2',solver= 'newton-cg', random_state = 17)
-lg.fit(X_train_balanced, y_train_balanced)
+lg.fit(X_train, y_train)
 y_pred = lg.predict(X_test)
 y_prob = lg.predict_proba(X_test)[:,1]
 
@@ -90,7 +65,7 @@ y_prob = lgbm.predict_proba(X_test)[:,1]"""
 
     #RandomForest
 rf = RandomForestClassifier(random_state = 17, max_depth = 5)
-rf.fit(X_train_balanced, y_train_balanced)
+rf.fit(X_train, y_train)
 y_pred = rf.predict(X_test)
 y_prob = rf.predict_proba(X_test)[:,1]
 
@@ -102,13 +77,13 @@ y_prob = xgb.predict_proba(X_test)[:,1]"""
 
     #Adaboost
 adb = AdaBoostClassifier(random_state = 17)
-adb.fit(X_train_balanced, y_train_balanced)
+adb.fit(X_train, y_train)
 y_pred = adb.predict(X_test)
 y_prob = adb.predict_proba(X_test)[:,1]
 
     #Decision Tree
 dtr = DecisionTreeClassifier(random_state = 17)
-dtr.fit(X_train_balanced, y_train_balanced)
+dtr.fit(X_train, y_train)
 y_pred = dtr.predict(X_test)
 y_prob = dtr.predict_proba(X_test)[:,1]   
 # validate
@@ -124,11 +99,11 @@ lg_cm = confusion_matrix(y_test, y_pred)
 print(classification_report(y_test, y_pred))
 print(f'ROC AUC score: {round(roc_auc_score(y_test, y_prob), 3)}')
 
-results_cv.iloc[0, 0] = round(cross_val_score(lg, X_train_balanced, y_train_balanced, cv = cv, scoring = 'accuracy').mean(), 3)
-results_cv.iloc[1, 0] = round(cross_val_score(lg, X_train_balanced, y_train_balanced, cv = cv, scoring = 'precision').mean(), 2)
-results_cv.iloc[2, 0] = round(cross_val_score(lg, X_train_balanced, y_train_balanced, cv = cv, scoring = 'recall').mean(), 2)
-results_cv.iloc[3, 0] = round(cross_val_score(lg, X_train_balanced, y_train_balanced, cv = cv, scoring = 'f1').mean(), 2)
-results_cv.iloc[4, 0] = round(cross_val_score(lg, X_train_balanced, y_train_balanced, cv = cv, scoring = 'roc_auc').mean(), 3)
+results_cv.iloc[0, 0] = round(cross_val_score(lg, X_train, y_train, cv = cv, scoring = 'accuracy').mean(), 3)
+results_cv.iloc[1, 0] = round(cross_val_score(lg, X_train, y_train, cv = cv, scoring = 'precision').mean(), 2)
+results_cv.iloc[2, 0] = round(cross_val_score(lg, X_train, y_train, cv = cv, scoring = 'recall').mean(), 2)
+results_cv.iloc[3, 0] = round(cross_val_score(lg, X_train, y_train, cv = cv, scoring = 'f1').mean(), 2)
+results_cv.iloc[4, 0] = round(cross_val_score(lg, X_train, y_train, cv = cv, scoring = 'roc_auc').mean(), 3)
 
 # Visualize confusion matrix
 plt.figure(figsize = (9, 6))
@@ -150,4 +125,4 @@ plt.axis('tight')
 plt.ylabel('True Positive Rate')
 plt.xlabel('False Positive Rate')
 plt.show()
-# Outputs
+# Outputs'''
