@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 
 from sklearn.metrics import classification_report, roc_auc_score, accuracy_score
 from src.dataset import preprocessing
-#from imblearn.over_sampling import SMOTE
+from imblearn.over_sampling import SMOTE
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -18,15 +18,15 @@ def run(models):
 
     # Split data
     X_train, X_test, y_train, y_test = train_test_split(X.values, y.values, test_size=0.3, random_state=0)
-
-    
+    oversample = SMOTE()
+    X_train_balanced, y_train_balanced = oversample.fit_resample(X_train, y_train)
+    print(X_train_balanced.shape)
     # Fetch model from model.py
-    #trainmodel = LogisticRegression()
     trainmodel = model_train.models.values()
  
     for models in trainmodel:
     # Fit model on training data
-        models.fit(X_train,y_train)
+        models.fit(X_train_balanced, y_train_balanced)
 
     # Predictions
         y_pred = models.predict(X_test)
