@@ -1,2 +1,2 @@
-TRAINING_FILE = '../data/stroke-data.csv'
-MODEL_OUTPUT = '../models/'
+TRAINING_FILE = './data/sroke-data.csv'
+MODEL_OUTPUT = './models/'
