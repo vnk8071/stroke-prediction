@@ -3,10 +3,9 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 
-
 models = {
     "Logistic Regression": LogisticRegression(
-        penalty='l2', C= 0.01
+    C= 0.01, solver='newton-cg',  penalty='l2',
     ),
     "RandomForest": RandomForestClassifier(
         max_depth= 7
