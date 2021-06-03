@@ -22,8 +22,8 @@ def preprocessing(data_dir):
     Input:
         data_dir <str> : path to data file (csv), can be train set or test set
     Returns:
-        X <m x n>: data features of n samples
-        y <1 x n>:  data labels
+        X <8 x 5109>: data features of n samples
+        y <1 x 5109>:  data labels
     '''
     # Load data
     df = pd.read_csv(data_dir)
