@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 
 from sklearn.metrics import classification_report, roc_auc_score, accuracy_score
 from src.dataset import preprocessing
-from imblearn.over_sampling import SMOTE
+#from imblearn.over_sampling import SMOTE
 import warnings
 warnings.filterwarnings("ignore")
 
