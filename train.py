@@ -12,7 +12,7 @@ import model
 import os
 import argparse
 import joblib
-
+import json
 from sklearn.model_selection import train_test_split, cross_val_score
 
 from sklearn.linear_model import LogisticRegression
@@ -27,7 +27,6 @@ from sklearn.metrics import f1_score, log_loss, roc_auc_score, recall_score, acc
 
 import warnings
 warnings.filterwarnings("ignore")
-
 
 
 # Train
@@ -74,7 +73,7 @@ def run(df, model):
         # Save model
         joblib.dump(
             train_model,
-            os.path.join(config.MODEL_OUTPUT, f"../models/train-model.bin")
+            os.path.makedirs(config.MODEL_OUTPUT, f"../models")
         )
 
 # Outputs
