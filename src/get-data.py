@@ -6,7 +6,7 @@ import os
 import shutil
 
 FILE_ID = '1VzgL-JO6JyOT4e6l5RumZyuo2a4tnlZ-'
-DESTINATION = './data/stroke-data.zip'
+DESTINATION = './data/stroke-data.csv'
 
 def download_file_from_google_drive(id, destination):
     URL = "https://docs.google.com/uc?export=download"
