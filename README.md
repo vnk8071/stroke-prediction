@@ -17,9 +17,14 @@ conda create -n myenv python=3.7
 conda activate myenv
 ```
 
+Change directory:
+```bash
+cd stroke-prediction/
+```
+
 Install dependencies:
 ```bash
-pip install -r ./stroke-prediction/requirements.txt
+pip install -r requirements.txt
 ```
 
 Download and set up data by running
