@@ -29,7 +29,7 @@ pip install -r requirements.txt
 
 Download and set up data by running
 ```bash
-bash setup-data.sh
+./setup-data.sh
 ```
 
 ## Usage
