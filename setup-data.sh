@@ -1,5 +1,5 @@
 #!/bin/bash
 
-mkdir data
+#mkdir data
 python ./src/get-data.py
-unzip ./data/data.zip -d ./data
+unzip ./data/stroke-data.zip -d ./data
