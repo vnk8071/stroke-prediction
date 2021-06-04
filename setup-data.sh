@@ -1,2 +1,2 @@
 #!/bin/bash
-echo python ./src/get-data.py
+python ./src/get-data.py
