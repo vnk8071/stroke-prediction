@@ -19,7 +19,7 @@ conda activate myenv
 
 Install dependencies:
 ```bash
-pip install -r requirements.txt
+pip install -r ./stroke-prediction/requirements.txt
 ```
 
 Download and set up data by running
