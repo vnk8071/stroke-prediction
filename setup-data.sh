@@ -1,3 +1,3 @@
-#!/bin/sh
+#!/bin/bash
 
-python ./src/get-data.py
+echo python ./src/get-data.py
