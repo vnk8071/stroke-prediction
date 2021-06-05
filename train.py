@@ -42,7 +42,7 @@ def run(models):
     # Save model
         joblib.dump(
             models,
-            os.path.join(config.MODEL_OUTPUT, f"../models")
+            os.path.join(config.MODEL_OUTPUT, f"./models/models")
         )
 
 
