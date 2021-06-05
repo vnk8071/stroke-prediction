@@ -1,2 +1,2 @@
 TRAINING_FILE = './data/stroke-data.csv'
-MODEL_OUTPUT = './models/models'
+MODEL_OUTPUT = './models'
