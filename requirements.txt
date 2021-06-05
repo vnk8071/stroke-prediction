@@ -6,3 +6,5 @@ seaborn==0.11.1
 requests==2.25.1
 pytest-shutil==1.7.0
 imblearn==0.0
+xgboost==1.4.2
+lightGBM==3.2.1
