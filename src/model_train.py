@@ -8,15 +8,15 @@ models = {
     "Logistic Regression": LogisticRegression(
     C= 0.01, solver='newton-cg',  penalty='l2'
     ),
-    "RandomForest": RandomForestClassifier(
+    "Random Forest": RandomForestClassifier(
         max_depth= 7
     ),
-    "AdaBoost": AdaBoostClassifier(
+    "Adaboosting Classifier": AdaBoostClassifier(
     ),
-    "DecisionTree": DecisionTreeClassifier(
+    "Decision Tree": DecisionTreeClassifier(
     ),
-    "LightGBM": LGBMClassifier(    
+    "LightGBM Classifier": LGBMClassifier(    
     ),
-    "XGB": XGBClassifier(
+    "XGB Classifier": XGBClassifier(
     )
 }
