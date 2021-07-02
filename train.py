@@ -59,7 +59,11 @@ def run(models):
     # Save model
         joblib.dump(
             models,
+<<<<<<< HEAD
             os.path.join(config.MODEL_OUTPUT, str(models)[:4] + "model.pkl")
+=======
+            os.path.join(config.MODEL_OUTPUT, f"../models/models")
+>>>>>>> e0ae974a5b641dbde63133fb51db7e7553eade93
         )
 
 
