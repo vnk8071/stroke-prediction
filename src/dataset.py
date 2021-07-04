@@ -46,20 +46,17 @@ def target(df):
     '''
     X = df.drop(["stroke","id", "ever_married", "work_type"], 1)
     y = df.stroke
+
     return X, y
 
-patient = {"gender": ["Male"], "age": [67], "hypertension": ["No"],\
-               "heart_disease": ["Yes"], "Residence_type": ["Urban"],\
-               "avg_glucose_level": [228], "bmi": [37],\
-               "smoking_status": ["formerly smoked"]}
-patient = pd.DataFrame(patient)
-def add_input(X, patient):
-    frames = [X, patient]
-    X = pd.concat(frames, ignore_index= True)
-    cat_cols = X.select_dtypes(include = ['object']).columns.to_list()
-    for i in cat_cols:
-        le = LabelEncoder()
-        X[i] = le.fit_transform(X[i].astype(str))
+
+def label_encoder(X):
+    X["gender"]  = X["gender"].replace({"Male": 0, "Female": 1}).astype(float)
+    X["hypertension"]  = X["hypertension"].replace({"No": 0, "Yes": 1}).astype(float)
+    X["heart_disease"]  = X["heart_disease"].replace({"No": 0, "Yes": 1}).astype(float)
+    X["Residence_type"]  = X["Residence_type"].replace({"Rural": 0, "Urban": 1}).astype(float)
+    X["smoking_status"]  = X["smoking_status"].replace({"Unknown": 0, "formerly smoked": 1,\
+                        "never smoked": 2, "smokes": 3}).astype(float)
     return X
 
 
