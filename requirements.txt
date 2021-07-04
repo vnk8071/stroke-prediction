@@ -8,3 +8,4 @@ pytest-shutil==1.7.0
 imblearn==0.0
 xgboost==1.4.2
 lightGBM==3.2.1
+streamlit==0.83.0
