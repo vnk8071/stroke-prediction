@@ -30,13 +30,23 @@ pip install -r requirements.txt
 Download and set up data by running
 ```bash
 ./setup-data.sh
+
+or 
+
+bash ./setup-data.sh
 ```
 
 ## Usage
-Run
+Run terminal
 ```bash
 python train.py
 ```
+
+Run streamlit
+```bash
+streamlit run streamlit.py
+```
+
 ## Try your best
 
 
