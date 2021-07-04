@@ -30,19 +30,20 @@ pip install -r requirements.txt
 Download and set up data by running
 ```bash
 ./setup-data.sh
-
+```
 or 
-
+```bash
 bash ./setup-data.sh
 ```
+Wait about 30 seconds to download data
 
 ## Usage
-Run terminal
+Run terminal and save models
 ```bash
 python train.py
 ```
 
-Run streamlit
+Use streamlit to predict stroke
 ```bash
 streamlit run streamlit.py
 ```
