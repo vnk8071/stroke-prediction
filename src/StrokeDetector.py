@@ -1,24 +1,38 @@
 import joblib
-import config
-from src.model_train import save_models
+from src import config
+from src import model_train
 from src.param import mean, std
-from streamlit import input_user, user_predict
 
 
-class StrokeDetector:
-    def __init__(self, modelpath):
-        self.model = joblib.load(config.MODEL_OUTPUT + save_models[modelpath])
+class StrokeDectector:
+    def __init__(self, classifier_model):
+        self.model = joblib.load(config.MODEL_OUTPUT + model_train.save_models[classifier_model])
         self.mean = mean
-        self.std = std
+        self.std = std 
     
-    def transform(self):
-        # Transform input of patient into encoder and scaler
-        patient = input_user()
-        patient_scaler = user_predict(patient, self.mean, self.std)
-        return patient_scaler
+
+    def user_predict(self, patient):
+        '''
+        Input: Patient status with label encoding
+
+        Return: Type ndarray of patient status after using Standardization method
+        '''
+        patient_predict = (patient - self.mean) / self.std
+        return patient_predict
+
 
     def predict(self, patient):
-        patient_scaler = self.transform(patient)
-        output = self.model(patient_scaler)
-        return output
+        '''
+        Input: Paitent status 
+
+        Return: Predict stroke or no stroke
+        '''
+        patient_predict = self.user_predict(patient)
+        output = self.model.predict(patient_predict)
+        
+        if output == 0:
+            output = "No stroke"
+        else:
+            output = "Stroke" 
+        return output 
 
