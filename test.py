@@ -1,13 +1,40 @@
-from src.model_train import save_models
-from src.StrokeDetector import StrokeDetector
+from src.StrokeDetector import StrokeDectector
 import numpy as np
+import argparse
 
-MODEL_PATH = './models/' + save_models["Logistic Regression"]
+# Argparse
+parser = argparse.ArgumentParser(
+                        prog= 'test',
+                        description= 'Choose model to predict'
+                        )
 
-patient_input = np.array([1,20,1,1,1,150,30,0])
+parser.add_argument(
+                    '-m', '--model', 
+                    type= str,
+                    default= "Logistic Regression",
+                    choices= [
+                              "Logistic Regression",
+                              "LightGBM Classifier",
+                              "Random Forest",
+                              "XGB Classifier",
+                              "Adaboosting Classifier",
+                              "Decision Tree"
+                             ]
+                   )
 
-detector = StrokeDetector(modeltype=MODEL_PATH)
+parser.add_argument(
+                    '-s', '--string',
+                    type= str,
+                    default= '0,0,0,0,0,0,0,0'
+                   )
+args = parser.parse_args()
 
-out = detector.predict(patient_input)
+# Input of patient
+patient_input = np.array(args.string.split(','), float).reshape(1,-1)
 
-print("Output predict :", out)
+# Predict input
+detector = StrokeDectector(args.model)
+
+# Output stroke or no stroke
+output = detector.predict(patient_input)
+print("Output predict :", output)
