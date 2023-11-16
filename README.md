@@ -2,7 +2,11 @@
 
 Machine Learning tool to predict risk of having stroke.
 
-![banner](https://storage.googleapis.com/kaggle-datasets-images/1120859/1882037/04da2fb7763e553bdf251d5adf6f88d9/dataset-cover.jpg?t=2021-01-26-19-57-05)
+Repo Github: https://github.com/vnk8071/stroke-prediction
+
+Link blog: https://github.com/vnk8071/stroke-prediction/blob/master/blog_post.md
+
+![banner](images/dataset-cover.jpeg)
 
 ## Domain Background
 According to the World Health Organization (WHO) stroke is the 2nd leading cause of death globally, responsible for approximately 11% of total deaths. It will be good if we detect and prevent this deadly disease in time, it will bring happiness to the sick and have more time to live.
